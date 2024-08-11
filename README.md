@@ -1,7 +1,7 @@
-![image](https://github.com/user-attachments/assets/559d33a6-141a-4fec-9452-466c94c57839)# Java-Spring-MCS
+## Java-Spring-MCS
 Project có javacore - spring - microservices
 
-#AOP
+##AOP
 có thể chèn vào các function khác đang hoạt dhhong
 định nghĩa các aspect
 @Before
@@ -26,7 +26,7 @@ public Object acitvity(ProceedingJoinPoint pjp) {
 }
 }
 
-#xử lý exception chung 
+##xử lý exception chung 
 @RestcontrollerAdvice
 public class ExHandler {
 @ExceptionHandler(Exception.class)
@@ -35,24 +35,24 @@ public ResponseEnity<> handleGeneralException(Exception ex) {}
 
 tư duy tạo 1 objectresponse chung và xử lý chung trong đấy
 
-#Kafka
+##Kafka
 ![image](https://github.com/user-attachments/assets/da4af034-c120-43ca-b32a-cdbff61c212f)
 
 Kafka Cluster là 1 cụm casc broker Kafka là vieccje cùng nhau để cung cấp một hê thống phân tán có độ tin cậy cao và khả năng mở rộng để xử lý dữ liệu streaming. cụm Kafka đảm bảo rằng các bản sao dữ liệu(replicas) được phân phối  trên nhiều brocker đc cung cấp tính sẵn sàng cao và khả năng chịu lỗi.
 Các thành phần chính: 
 Broker: 
-- brocker chịu trách nghiệm lưu trữ dữ liệu, xử lý các yêu cầu từ producer, consumer và quản lý dữ liệu
-- mỗi broker trong cluster được xác định bằng 1 id duy nhất
+`-` brocker chịu trách nghiệm lưu trữ dữ liệu, xử lý các yêu cầu từ producer, consumer và quản lý dữ liệu
+`-` mỗi broker trong cluster được xác định bằng 1 id duy nhất
 Topic:
-- Mỗi topic được chia nhiều partrition. mỗi patrition là 1 log đơn giản, các bản ghi đc thêm vào tuần tự
-- Phân vùng cho phép kafka phân phối dữ liệu trên nhiều broker, giúp tăng khả năng xử lý song song và đảm bảo rằng khả năng mở rộng
+`-` Mỗi topic được chia nhiều partrition. mỗi patrition là 1 log đơn giản, các bản ghi đc thêm vào tuần tự
+`-` Phân vùng cho phép kafka phân phối dữ liệu trên nhiều broker, giúp tăng khả năng xử lý song song và đảm bảo rằng khả năng mở rộng
 Repliction:
-- kafka cung cấp khả năng sao chép dữ liệu bằng cách duy nhiều bản sao (replicas) của mỗi partrition trên các broker khác nhau điều này đảm bảo rằng nếu 1 broker gặp sự cố dữ liệu vẫn có sẵn trên các broker khác.
+`-` kafka cung cấp khả năng sao chép dữ liệu bằng cách duy nhiều bản sao (replicas) của mỗi partrition trên các broker khác nhau điều này đảm bảo rằng nếu 1 broker gặp sự cố dữ liệu vẫn có sẵn trên các broker khác.
 zooKepker
-- Kafka sử dụng **Apache Zookeepr** để quản lý metadata của cluster và thực hiện nhiệm vụ quan trọng như theo dõi trạng thái của cá broker, leader election cho các partrition và lưu trữ cấu hình.
+`-` Kafka sử dụng **Apache Zookeepr** để quản lý metadata của cluster và thực hiện nhiệm vụ quan trọng như theo dõi trạng thái của cá broker, leader election cho các partrition và lưu trữ cấu hình.
 **Producer và Consumer**:
-- Producer: các ứng dụng gửi dữ liệu vào các topic trong Kafka
-- Consumer: các ứng dựng đọc dữ liệu từ các topic
+`-` Producer: các ứng dụng gửi dữ liệu vào các topic trong Kafka
+`-` Consumer: các ứng dựng đọc dữ liệu từ các topic
 **Cách hoạt động**:
   **Producer** -> gửi dữ liệu tới Kafka Cluster: khi producer gửi dữ liệu, Kafka cluster sẽ xác định patitrion tích hợp cho dữ liệu đó dựa trên key hoặc thuật toán round-robin
   -> dữ liệu được gửi tới các broker tương ứng với partitrion đó
@@ -61,23 +61,22 @@ zooKepker
   **Zookeeper** quản lý trạng thái của Kafka cluster -> theo dõi thôn gtin về broker, topics và phân vùng. nó cũng xử lý việc leader election khi 1 broker bị lỗi đảm bảo rằng broker khác sẽ trở thành leaer cho các partitrion mà nó chịu trách nhiệm.
 
 ** Tính Sẵn Sàng Cao và Khả Năng Chịu Lỗi:**
-- Leader Election: Nếu broker nào đó bị lỗi, Zookeeper sẽ giúp chọn một leader mới cho các partition mà broker đó quản lý.
-- Replication: Nếu một broker bị lỗi, dữ liệu vẫn có sẵn trên các broker khác nhờ vào việc sao chép partition.
-**Triển Khai Kafka Cluster:
-Cấu hình Kafka Cluster:**
-
--Thiết lập nhiều broker trên các server khác nhau.
+`-` Leader Election: Nếu broker nào đó bị lỗi, Zookeeper sẽ giúp chọn một leader mới cho các partition mà broker đó quản lý.
+`-` Replication: Nếu một broker bị lỗi, dữ liệu vẫn có sẵn trên các broker khác nhờ vào việc sao chép partition.
+**Triển Khai Kafka Cluster:**
+**Cấu hình Kafka Cluster:**
+`-`Thiết lập nhiều broker trên các server khác nhau.
 Cấu hình replication factor cho mỗi topic để đảm bảo dữ liệu được sao chép trên nhiều broker.
 **Cấu hình Zookeeper:**
 
--Thiết lập một cụm Zookeeper để quản lý Kafka Cluster. Số lượng Zookeeper server nên là số lẻ để đạt được quorum khi có lỗi.
+`-`Thiết lập một cụm Zookeeper để quản lý Kafka Cluster. Số lượng Zookeeper server nên là số lẻ để đạt được quorum khi có lỗi.
 **Monitor và quản lý:**
 
--Sử dụng các công cụ giám sát để theo dõi tình trạng của cluster và thực hiện bảo trì khi cần thiết.
+`-`Sử dụng các công cụ giám sát để theo dõi tình trạng của cluster và thực hiện bảo trì khi cần thiết.
 **Lợi Ích của Kafka Cluster:**
--Khả năng mở rộng: Kafka Cluster có thể dễ dàng mở rộng bằng cách thêm nhiều broker.
--Độ tin cậy cao: Nhờ vào replication và Zookeeper, Kafka Cluster có thể xử lý lỗi mà không mất dữ liệu.
--Hiệu suất cao: Kafka có thể xử lý một lượng lớn dữ liệu với độ trễ thấp, phù hợp cho các hệ thống yêu cầu xử lý dữ liệu thời gian thực.
+`-`Khả năng mở rộng: Kafka Cluster có thể dễ dàng mở rộng bằng cách thêm nhiều broker.
+`-`Độ tin cậy cao: Nhờ vào replication và Zookeeper, Kafka Cluster có thể xử lý lỗi mà không mất dữ liệu.
+`-`Hiệu suất cao: Kafka có thể xử lý một lượng lớn dữ liệu với độ trễ thấp, phù hợp cho các hệ thống yêu cầu xử lý dữ liệu thời gian thực.
 Kafka Cluster là một phần quan trọng trong các hệ thống phân tán hiện đại, đặc biệt là trong các ứng dụng cần xử lý và phân phối dữ liệu streaming với độ tin cậy cao.
 #Zookeper
 Zookeeper là một dịch vụ quản lý tập trung, thường được sử dụng để cung cấp các chức năng như đồng bộ hóa, quản lý cấu hình, và điều phối dịch vụ trong các hệ thống phân tán. Apache Kafka, cùng với nhiều hệ thống khác như Hadoop, HBase, và Apache Storm, sử dụng Zookeeper để quản lý và điều phối các hoạt động trong cụm (cluster).
